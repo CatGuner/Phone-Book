@@ -13,6 +13,8 @@ public class Main {
     public static long timeJumpSearch = 0;
     public static long timeQuickSort = 0;
     public static long timeBinarySearch = 0;
+    public static long creatingTimeHash = 0;
+    public static long searchingTimeHash = 0;
 
     public static void main(String[] args) throws InterruptedException {
         String[] persons = readFile("/Users/a18574357/Downloads/find.txt");
@@ -37,7 +39,6 @@ public class Main {
         timeBubbleSort = System.currentTimeMillis();
         secondPart.startSort();
         timeBubbleSort = System.currentTimeMillis() - timeBubbleSort;
-//        System.out.println(timeBubbleSort);
 
         timeJumpSearch = System.currentTimeMillis();
         founds = secondPart.startSearch(persons);
@@ -55,6 +56,17 @@ public class Main {
         founds = thirdPart.startSearch(persons);
         timeBinarySearch = System.currentTimeMillis() - timeBinarySearch;
         printTotalFound(++founds, timeQuickSort, timeBinarySearch, true);
+
+
+        System.out.println();
+        System.out.println("Start searching (hash table)...");
+        creatingTimeHash = System.currentTimeMillis();
+        HashRealisation hashRealisation = new HashRealisation(base);
+        creatingTimeHash = System.currentTimeMillis() - creatingTimeHash;
+        searchingTimeHash = System.currentTimeMillis();
+        founds = hashRealisation.startSearching(persons);
+        searchingTimeHash = System.currentTimeMillis() - searchingTimeHash;
+        printTotalHash(++founds);
     }
 
 
@@ -67,6 +79,12 @@ public class Main {
 
     public static void printTotalFound(int founds, long searchTime){
         System.out.println("Found " + founds + " / 500 entries. Time taken: " + parseDate(searchTime));
+    }
+
+    public static void printTotalHash(int founds){
+        System.out.println("Found " + founds + " / 500 entries. Time taken: " + parseDate(creatingTimeHash + searchingTimeHash));
+        System.out.println("Creating time: " + parseDate(creatingTimeHash));
+        System.out.println("Searching time: " + parseDate(searchingTimeHash));
     }
 
     public static void printTotalFound(int founds, long sortTime, long searchTime, boolean isItSorted){

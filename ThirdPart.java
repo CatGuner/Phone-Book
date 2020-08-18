@@ -1,4 +1,5 @@
 package phonebook;
+
 // quick sort + binary search
 public class ThirdPart extends FirstPart implements Sort {
 

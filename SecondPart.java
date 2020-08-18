@@ -1,4 +1,5 @@
 package phonebook;
+
 // bubble sort + jump search
 public class SecondPart extends FirstPart implements Sort{
 
@@ -68,7 +69,6 @@ public class SecondPart extends FirstPart implements Sort{
                     swap(this.base, j, j + 1);
                 }
                 if (Main.timeLinearSearch * 10 < System.currentTimeMillis() - Main.timeBubbleSort){
-//                    System.out.println(System.currentTimeMillis() - Main.timeBubbleSort);
                     return false;
                 }
             }
